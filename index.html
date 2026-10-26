@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S.E Beer Đối diện Ga Huế — Quán Nhậu Huế & Nhậu Khuya Gần Ga Huế (37–39 Bùi Thị Xuân)</title>
+  <meta name="description" content="S.E Beer Đối diện Ga Huế (37–39 Bùi Thị Xuân, Phường Thuận Hóa, TP. Huế) — Quán nhậu Huế bình dân, nhậu khuya gần Ga Huế suốt 6 năm từ 17h đến hết khách. Đặt bàn trước khung 17h–20h tặng Sụn gà rang muối, Nem chả tré, Hến trộn." />
+  <meta name="keywords" content="quán nhậu Huế, nhậu khuya gần Ga Huế, S.E Beer Ga Huế, 37 Bùi Thị Xuân Huế, quán nhậu sinh viên Huế" />
+
+  <!-- Thẻ Open Graph để khi gửi link qua Zalo hoặc Facebook sẽ hiện ảnh quán và tiêu đề đẹp -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="S.E Beer Đối diện Ga Huế — 6 Năm Tinh Hoa Mồi Bén & Nhậu Khuya" />
+  <meta property="og:description" content="Đối diện Ga Huế (37–39 Bùi Thị Xuân, Phường Thuận Hóa) • Mở cửa 17h – Hết khách • Đặt bàn khung 17h–20h tặng mồi khai vị • Hotline/Zalo: 0333022068" />
+  <meta property="og:image" content="images/hero-se-beer.jpg" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <!-- Khai báo dữ liệu Schema Restaurant để nổi bật trên Google Tìm Kiếm & Bản Đồ Địa Phương -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "S.E Beer Đối diện Ga Huế",
+    "image": "images/hero-se-beer.jpg",
+    "telephone": "+84333022068",
+    "servesCuisine": "Ẩm thực Huế, Mồi nhậu bình dân, Lẩu & Nướng đêm",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "37–39 Bùi Thị Xuân (Đối diện Ga Huế), Phường Thuận Hóa",
+      "addressLocality": "TP. Huế",
+      "addressCountry": "VN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 16.4572,
+      "longitude": 107.5786
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "17:00",
+        "closes": "03:00"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Bộ Phông Chữ Tiếng Việt Cao Cấp từ UI/UX Pro Max: Barlow Condensed (Sân Ga) + Playfair Display (Kỷ Niệm) + Be Vietnam Pro (Nội Dung) + JetBrains Mono (Bảng Điện Tử) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Lớp hiệu ứng hạt mưa đêm Huế nhẹ nhàng (bật/tắt tùy ý khách) -->
+  <div id="lop-mua-hue" class="lop-mua-hue"></div>
+
+  <!-- THANH TÍN HIỆU SÂN GA ĐÊM: ĐÈN TRẠNG THÁI MỞ CỬA + THỜI TIẾT HUẾ + ĐỒNG HỒ CHUYẾN TÀU ƯU ĐÃI -->
+  <div class="thanh-tin-hieu-san-ga">
+    <div class="khung-tin-hieu-san-ga">
+      <div class="cum-den-trang-thai" id="hop-den-trang-thai">
+        <span class="cham-den dang-mo" id="cham-den-quan"></span>
+        <span id="chu-trang-thai-quan">🟢 Đang kiểm tra giờ mở cửa sân ga...</span>
+      </div>
+
+      <div class="hop-thoi-tiet-hue" id="hop-thoi-tiet-hue">
+        <span>🌧️ Thời tiết Ga Huế: Đang cập nhật...</span>
+      </div>
+
+      <div class="dong-ho-tau-uu-dai">
+        <span id="nhan-tau-uu-dai">🚂 Chuyến tàu Giờ Vàng (17h–20h):</span>
+        <span class="so-dem-nguoc" id="so-dem-nguoc-uu-dai">00:00:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANH ĐIỀU HƯỚNG CỐ ĐỊNH DÀNH CHO KHÁCH HÀNG -->
+  <header class="thanh-dieu-huong">
+    <div class="khung-dieu-huong">
+      <a href="#khu-vuc-hero" class="thuong-hieu-logo">
+        <div class="huy-hieu-6-nam" id="huy-hieu-nam">S.E</div>
+        <div>
+          <div class="ten-quan-header" id="header-ten-quan">S.E Beer Đối diện Ga Huế</div>
+          <div class="phu-de-header" id="header-phu-de">37–39 BÙI THỊ XUÂN • ĐỐI DIỆN GA HUẾ</div>
+        </div>
+      </a>
+
+      <nav class="menu-chinh-desktop">
+        <a href="#cau-chuyen-6-nam">Câu Chuyện 6 Năm</a>
+        <a href="#thuc-don">Món Tượng Trưng</a>
+        <a href="#khong-gian">Không Khí Quán</a>
+        <a href="#uu-dai">Ưu Đãi Đêm</a>
+        <a href="#dat-ban">Đặt Bàn</a>
+      </nav>
+
+      <div class="nhom-nut-header">
+        <a href="tel:0333022068" class="nut-vien nut-goi-header" id="header-nut-goi">📞 0333022068</a>
+        <a href="#dat-ban" class="nut-chinh nut-dat-header">🏮 Đặt Bàn Ngay</a>
+      </div>
+    </div>
+    <nav class="menu-di-dong">
+      <a href="#cau-chuyen-6-nam">Câu Chuyện 6 Năm</a>
+      <a href="#thuc-don">6 Món Tượng Trưng</a>
+      <a href="#khong-gian">Không Khí Quán</a>
+      <a href="#uu-dai">Ưu Đãi</a>
+      <a href="#dat-ban">Đặt Bàn</a>
+    </nav>
+  </header>
+
+  <!-- 1. MÀN HÌNH CHÀO ĐÓN (HERO BANNER) -->
+  <section id="khu-vuc-hero" class="hero-banner">
+    <div class="noi-dung-hero">
+      <span class="nhan-ky-niem" id="hero-phu-de">S.E BEER • ĐỐI DIỆN GA HUẾ • 6 NĂM NHẬU KHUYA (2020 – 2026)</span>
+      <h1 class="tieu-de-hero">
+        <span id="hero-ten-quan">S.E Beer Đối diện Ga Huế</span><br />
+        Mồi Bén Lửa Hồng • Chiến Tới Đêm Sâu
+      </h1>
+      <p class="mo-ta-hero" id="hero-khau-hieu">
+        Sáu năm một góc phố quen đối diện Ga Huế — Mồi bén, bia lạnh, anh em sum vầy tới sáng.
+      </p>
+
+      <div class="thong-tin-nhanh-hero">
+        <div class="the-thong-tin-hero">🔥 <strong>6 Năm</strong> Uy Tín Từ 2020</div>
+        <div class="the-thong-tin-hero">🌙 Giờ Mở Cửa: <strong id="hero-gio-mo">17h - Hết khách</strong></div>
+        <div class="the-thong-tin-hero">📞 Hotline Giữ Bàn: <strong id="hero-sdt">0333022068</strong></div>
+      </div>
+
+      <div class="nhom-nut-hero">
+        <a href="#dat-ban" class="nut-chinh nut-hero">🏮 Đặt Bàn Nhận Vé Tàu S.E</a>
+        <a href="#thuc-don" class="nut-vien nut-hero">🚂 Xem Bảng Giờ Tàu 6 Món Tủ</a>
+      </div>
+
+      <!-- Hiệu ứng âm thanh còi tàu đêm Ga Huế & mưa Huế (chỉ phát khi khách tự bấm nút) -->
+      <div class="thanh-hieu-ung-san-ga">
+        <button type="button" class="nut-coi-tau" id="nut-coi-tau" onclick="phatTiengCoiTauGaHue()">
+          🚂 Bấm Nghe Tiếng Còi Tàu Đêm Ga Huế
+        </button>
+        <button type="button" class="nut-coi-tau" id="nut-mua-hue" onclick="batTatHieuUngMuaHue()">
+          🌧️ Bật Không Khí Mưa Đêm Huế
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CÂU CHUYỆN THƯƠNG HIỆU 6 NĂM -->
+  <section id="cau-chuyen-6-nam" class="khu-vuc">
+    <div class="khung-cau-chuyen">
+      <div>
+        <span class="nhan-khu-vuc">KÝ ỨC 6 NĂM ĐỐI DIỆN GA HUẾ (2020 – 2026)</span>
+        <h2 class="tieu-de-khu-vuc">Tiếng Còi Tàu Đêm, Hội Bạn Sinh Viên & Những Cuộc Vui Chẳng Muốn Về</h2>
+        <p id="noi-dung-cau-chuyen" style="color:var(--text-muted); margin-top:14px; font-size:0.98rem; line-height:1.78;">
+          Có những đêm Huế mưa lạnh hay những tối mùa hè gió thổi lồng lộng trước sân Ga Huế, khi tiếng còi tàu đêm vừa ngân dài cũng là lúc ánh đèn vàng ở S.E Beer sáng rực nhất. Suốt 6 năm qua (từ 2020), góc quán nhỏ đối diện nhà ga này đã chứng kiến biết bao khoảnh khắc thanh xuân của những hội bạn sinh viên xứ Huế: từ những đêm ăn mừng qua môn, những buổi chia tay bạn bè ra ga về quê hay lên tàu vào Nam lập nghiệp, cho đến những cuộc tâm sự trắng đêm bên nồi lẩu nghi ngút khói dù trong túi chỉ còn vài đồng lẻ cuối tháng. Tàu có thể đến rồi đi, các lứa sinh viên có thể tốt nghiệp rời xa Huế, nhưng bếp than S.E Beer vẫn luôn đỏ lửa từ 17h tới khi hết khách — giữ nguyên vị mồi bén, cốc bia mát lạnh và cái tình anh em nồng ấm đợi ngày hội ngộ.
+        </p>
+
+        <div class="con-so-6-nam">
+          <div class="o-con-so">
+            <span class="so-lon" id="so-nam-hien-thi">6+ Năm</span>
+            <span class="chu-nho">Thanh xuân bên sân Ga Huế</span>
+          </div>
+          <div class="o-con-so">
+            <span class="so-lon">17h – Hết Khách</span>
+            <span class="chu-nho">Đỏ lửa cùng những chuyến tàu đêm</span>
+          </div>
+          <div class="o-con-so">
+            <span class="so-lon">1 Phút Đi Bộ</span>
+            <span class="chu-nho">Từ cửa Ga Huế băng qua đường</span>
+          </div>
+        </div>
+
+        <!-- Thông tin tiện ích thực tế tại quán -->
+        <div class="luoi-tien-ich">
+          <div class="the-tien-ich">
+            <span class="icon-tien-ich">🛵</span>
+            <div>
+              <strong style="color:var(--amber-gold); font-size:0.9rem;">Chỗ Để Xe Rộng Rãi</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted);">Đậu xe máy & ô tô thoải mái, có nhân viên trông coi an toàn suốt đêm.</p>
+            </div>
+          </div>
+          <div class="the-tien-ich">
+            <span class="icon-tien-ich">⛺</span>
+            <div>
+              <strong style="color:var(--amber-gold); font-size:0.9rem;">Mái Che Mưa Huế Vô Tư</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted);">Không gian thoáng mát ngắm Ga Huế, có mái che di động không lo mưa tạt.</p>
+            </div>
+          </div>
+          <div class="the-tien-ich">
+            <span class="icon-tien-ich">🍻</span>
+            <div>
+              <strong style="color:var(--amber-gold); font-size:0.9rem;">Nhận Đoàn Lớn 30–50 Khách</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted);">Ghép bàn dài nhanh chóng cho hội lớp sinh viên, liên hoan, sinh nhật.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="images/anime-nhau-1.png"
+          alt="Khoảnh khắc hội bạn sinh viên nhậu khuya đối diện Ga Huế"
+          class="anh-cau-chuyen"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. BẢNG GIỜ TÀU ĐIỆN TỬ & 6 MÓN NHẬU TƯỢNG TRƯNG MINH HỌA (CHỈ XEM, KHÔNG GHI GIÁ TIỀN) -->
+  <section id="thuc-don" class="khu-vuc">
+    <div class="dau-muc-khu-vuc">
+      <span class="nhan-khu-vuc">CHỦ ĐỀ SÂN GA ĐÊM • ĐỐI DIỆN GA HUẾ</span>
+      <h2 class="tieu-de-khu-vuc">Bảng Giờ Tàu Điện Tử & 6 Món Bén Mồi Tượng Trưng</h2>
+      <p class="mo-ta-khu-vuc">
+        Mỗi món mồi tủ tại S.E Beer là một "chuyến tàu hương vị" phục vụ từ 17h đến hết khách (chỉ trưng bày minh họa — mời anh em tới quán xem menu đầy đủ tại bàn):
+      </p>
+    </div>
+
+    <!-- Bảng giờ tàu điện tử kiểu chữ lật (Split-Flap Board) -->
+    <div class="khung-bang-gio-tau">
+      <div class="dau-bang-gio-tau">
+        <div class="tieu-de-bang-tau">
+          <span>🚂 BẢNG ĐIỆN TỬ LỊCH TRÌNH MỒI BÉN — GA S.E BEER</span>
+        </div>
+        <span style="font-family:monospace; font-size:0.8rem; color:var(--text-muted);">TUYẾN ĐÊM: 17H – HẾT KHÁCH</span>
+      </div>
+      <div class="bang-dien-tu-tau" id="bang-gio-tau-mon"></div>
+    </div>
+
+    <div class="thanh-nhom-thuc-don an-di" id="bo-loc-nhom-mon"></div>
+    <div class="luoi-thuc-don" id="luoi-mon-an"></div>
+
+    <!-- 2 Trang Thực Đơn Chính Thức của S.E Beer Đối diện Ga Huế (Định dạng WebP siêu nhẹ) -->
+    <div class="khung-hai-trang-menu" id="bang-thuc-don-chinh-thuc">
+      <div style="text-align:center;">
+        <span class="nhan-khu-vuc">THỰC ĐƠN ĐẦY ĐỦ TẠI BÀN • S.E BEER ĐỐI DIỆN GA HUẾ</span>
+        <h3 style="color:#fff; font-size:1.35rem; margin-bottom:6px;">📖 Thực Đơn 2 Trang Chính Thức Của Quán</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted);">
+          Bấm trực tiếp vào từng trang thực đơn bên dưới để phóng to xem rõ toàn bộ các món Khai vị, Ếch, Ốc – Hải sản, Gà, Bò, Heo, Lẩu & Bếp than hồng:
+        </p>
+      </div>
+
+      <div class="luoi-hai-trang-menu">
+        <div class="the-anh-menu-quan" onclick="moXemAnhMenuLon('images/thuc-don-se-beer-1.webp', 'Thực đơn S.E Beer — Trang 1/2')">
+          <img src="images/thuc-don-se-beer-1.webp" alt="Thực đơn S.E Beer Đối diện Ga Huế - Trang 1/2" loading="lazy" />
+          <div class="nhan-trang-menu">🔍 Thực Đơn Trang 1/2 (Bấm để phóng to)</div>
+        </div>
+        <div class="the-anh-menu-quan" onclick="moXemAnhMenuLon('images/thuc-don-se-beer-2.webp', 'Thực đơn S.E Beer — Trang 2/2')">
+          <img src="images/thuc-don-se-beer-2.webp" alt="Thực đơn S.E Beer Đối diện Ga Huế - Trang 2/2" loading="lazy" />
+          <div class="nhan-trang-menu">🔍 Thực Đơn Trang 2/2 (Bấm để phóng to)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gợi ý chọn món theo nhóm (Toa tàu hội nhóm - không ghi giá tiền) -->
+    <div class="luoi-combo-nhom">
+      <div class="the-combo-nhom">
+        <span class="nhan-toa-tau">TOA ĐÔI / BÀN 2–4 ANH EM</span>
+        <h3 style="color:#fff; font-size:1.05rem; margin-bottom:6px;">Set Tâm Sự Đợi Tàu Đêm</h3>
+        <p style="font-size:0.86rem; color:var(--text-muted);">
+          Gợi ý gọi món: <strong>Hến Trộn</strong> xúc bánh tráng + <strong>Sụn Gà Rang Muối</strong> giòn rụm + <strong>Chân Gà Nướng</strong> than hồng lai rai cùng Bia Huda lạnh.
+        </p>
+      </div>
+      <div class="the-combo-nhom">
+        <span class="nhan-toa-tau">TOA HỘI BẠN / BÀN 5–8 NGƯỜI</span>
+        <h3 style="color:#fff; font-size:1.05rem; margin-bottom:6px;">Set Chiến Hữu & Sinh Viên</h3>
+        <p style="font-size:0.86rem; color:var(--text-muted);">
+          Gợi ý gọi món: <strong>Ếch Xào Sả</strong> + <strong>Cơm Chiên Hải Sản</strong> chắc bụng + <strong>Sụn Gà Rang Muối</strong> + Nồi <strong>Lẩu Hải Sản</strong> chua cay nghi ngút khói.
+        </p>
+      </div>
+      <div class="the-combo-nhom">
+        <span class="nhan-toa-tau">TOA ĐOÀN LỚN / 10–30+ KHÁCH</span>
+        <h3 style="color:#fff; font-size:1.05rem; margin-bottom:6px;">Set Họp Lớp & Sinh Nhật Xứ Huế</h3>
+        <p style="font-size:0.86rem; color:var(--text-muted);">
+          Trọn bộ 6 món đặc trưng của quán + Hàng chục món xào, nướng, lẩu um tại bàn. <strong>Giảm ngay 10% tổng hóa đơn mồi</strong> & tặng pháo sáng!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BỘ SƯU TẬP KHÔNG KHÍ QUÁN (GALLERY ANIME) -->
+  <section id="khong-gian" class="khu-vuc">
+    <div class="dau-muc-khu-vuc">
+      <span class="nhan-khu-vuc">KHÔNG KHÍ NHẬU ĐÊM</span>
+      <h2 class="tieu-de-khu-vuc">Ấm Cúng, Rộng Rãi & Đậm Tình Anh Em</h2>
+      <p class="mo-ta-khu-vuc">
+        Dù bạn đi 2 người tâm sự đêm khuya hay đi nguyên hội 20–30 anh em đồng nghiệp, nhân viên quán luôn sắp xếp chỗ ngồi thoáng mát và chu đáo nhất.
+      </p>
+    </div>
+    <div class="luoi-khong-gian" id="luoi-anh-khong-gian"></div>
+  </section>
+
+  <!-- 5. CHƯƠNG TRÌNH ƯU ĐÃI ĐÊM & ƯU ĐÃI THEO THỜI TIẾT HUẾ -->
+  <section id="uu-dai" class="khu-vuc">
+    <div class="dau-muc-khu-vuc">
+      <span class="nhan-khu-vuc">QUÀ TẶNG TRI ÂN KHÁCH QUEN</span>
+      <h2 class="tieu-de-khu-vuc">Ưu Đãi Đặt Bàn & Nhậu Khuya Đối Diện Ga Huế</h2>
+      <p class="mo-ta-khu-vuc" id="thong-diep-uu-dai-thoi-tiet">
+        Đặt bàn trước trong khung giờ vàng 17h – 20h để nhận ngay đĩa mồi khai vị miễn phí từ S.E Beer!
+      </p>
+    </div>
+    <div class="luoi-uu-dai" id="luoi-uu-dai-dem"></div>
+  </section>
+
+  <!-- 5B. ĐÁNH GIÁ KHÁCH HÀNG & BẢN ĐỒ CHỈ ĐƯỜNG 1 PHÚT TỪ GA HUẾ -->
+  <section id="danh-gia-ban-do" class="khu-vuc">
+    <div class="dau-muc-khu-vuc">
+      <span class="nhan-khu-vuc">KHÁCH QUEN NÓI GÌ VỀ S.E BEER</span>
+      <h2 class="tieu-de-khu-vuc">Điểm Hẹn 6 Năm Của Sinh Viên & Dân Nhậu Đêm Xứ Huế</h2>
+    </div>
+
+    <div class="luoi-danh-gia">
+      <div class="the-danh-gia">
+        <div class="sao-danh-gia">★★★★★ <span style="color:var(--text-muted); font-size:0.78rem;">5.0 • Google Maps</span></div>
+        <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:10px;">
+          "Quán nằm ngay đối diện cửa Ga Huế cực kỳ dễ tìm. Hội sinh viên tụi mình hay ghé từ lúc 18h, đặt bàn trước được tặng đĩa Sụn gà rang muối giòn rụm. Đồ ăn bình dân, nồi lẩu hải sản đầy ắp!"
+        </p>
+        <strong style="color:var(--amber-gold); font-size:0.84rem;">— Minh Hoàng (Cựu sinh viên ĐH Khoa Học Huế)</strong>
+      </div>
+      <div class="the-danh-gia">
+        <div class="sao-danh-gia">★★★★★ <span style="color:var(--text-muted); font-size:0.78rem;">5.0 • Khách đợi tàu đêm</span></div>
+        <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:10px;">
+          "Đợi chuyến tàu SE lúc nửa đêm chỉ cần đi bộ 1 phút qua đường là tới S.E Beer. Ếch xào sả với Hến trộn chuẩn vị Huế, bia Huda ướp lạnh tê tái, anh chủ quán nhiệt tình vui vẻ."
+        </p>
+        <strong style="color:var(--amber-gold); font-size:0.84rem;">— Anh Quốc Bảo (Khách du lịch Đà Nẵng – Huế)</strong>
+      </div>
+      <div class="the-danh-gia">
+        <div class="sao-danh-gia">★★★★★ <span style="color:var(--text-muted); font-size:0.78rem;">5.0 • Khách quen Phường Thuận Hóa</span></div>
+        <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:10px;">
+          "Ngồi nhậu nghe tiếng còi tàu đêm rất có cảm xúc. Chỗ để xe rộng, hôm nào Huế mưa bất chợt quán kéo mái che ra ngồi bên nồi lẩu nóng hổi tới khuya vẫn ấm cúng."
+        </p>
+        <strong style="color:var(--amber-gold); font-size:0.84rem;">— Anh Tuấn Anh & Hội bạn đồng nghiệp</strong>
+      </div>
+    </div>
+
+    <!-- Bản đồ nhúng trực tiếp & Chỉ đường 1 phút đi bộ từ Ga Huế -->
+    <div class="khung-ban-do-qr">
+      <div>
+        <span class="nhan-khu-vuc">VỊ TRÍ ĐẮC ĐỊA • CÁCH GA HUẾ 30 MÉT</span>
+        <h3 style="color:#fff; font-size:1.25rem; margin-bottom:8px;">📍 37–39 Bùi Thị Xuân (Đối diện Ga Huế), Phường Thuận Hóa, TP. Huế</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+          Từ cổng chính Ga Huế, bạn chỉ cần nhìn thẳng sang bên kia đường Bùi Thị Xuân là thấy ngay biển đèn vàng ấm áp của <strong>S.E Beer</strong> (1 phút đi bộ).
+        </p>
+        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border-strong); height:250px; margin-bottom:14px;">
+          <iframe
+            title="Bản đồ S.E Beer Đối diện Ga Huế"
+            src="https://www.google.com/maps?q=37+Bui+Thi+Xuan,+Hue,+Vietnam&output=embed"
+            width="100%"
+            height="250"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <a href="https://www.google.com/maps/dir/Ga+Hu%E1%BA%BF,+B%C3%B9i+Th%E1%BB%8B+Xu%C3%A2n,+TP.+Hu%E1%BA%BF/37+B%C3%B9i+Th%E1%BB%8B+Xu%C3%A2n,+TP.+Hu%E1%BA%BF" target="_blank" rel="noopener" class="nut-chinh">
+            🚶 Chỉ Đường Từ Ga Huế: 1 Phút Đi Bộ
+          </a>
+          <a href="tel:0333022068" class="nut-vien">📞 Gọi Chỉ Đường: 0333022068</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. BIỂU MẪU ĐẶT BÀN TRỰC TUYẾN (TÍCH HỢP NETLIFY FORMS + HÀM MÁY CHỦ GUI-DON + ZALO) -->
+  <section id="dat-ban" class="khu-vuc">
+    <div class="dau-muc-khu-vuc">
+      <span class="nhan-khu-vuc">GIỮ CHỖ NHANH TRONG 30 GIÂY</span>
+      <h2 class="tieu-de-khu-vuc">Đặt Bàn Trước — Tới Quán Có Chỗ Ngon Ngay</h2>
+      <p class="mo-ta-khu-vuc">
+        Điền thông tin bên dưới để quán xếp sẵn bàn đẹp, thoáng mát đối diện Ga Huế đón bạn và anh em nhé.
+      </p>
+    </div>
+
+    <div class="khung-dat-ban">
+      <!-- Form tích hợp sẵn data-netlify="true" để Netlify tự động thu thập mọi đơn đặt bàn từ điện thoại khách -->
+      <form id="form-dat-ban" name="dat-ban-se-beer" method="POST" data-netlify="true" onsubmit="xuLyGuiDonDatBan(event)">
+        <input type="hidden" name="form-name" value="dat-ban-se-beer" />
+        <input type="hidden" name="moi-dan-truoc" id="inp-hidden-moi-dan-truoc" value="" />
+
+        <h3 style="color:var(--amber-gold); margin-bottom:16px;">🏮 Thông Tin Giữ Bàn Của Bạn</h3>
+        <div class="luoi-input">
+          <div class="nhom-input">
+            <label for="inp-ten-khach">Tên của bạn *</label>
+            <input type="text" name="ten-khach" id="inp-ten-khach" placeholder="VD: Anh Tuấn / Chị Lan" required />
+          </div>
+          <div class="nhom-input">
+            <label for="inp-sdt-khach">Số điện thoại liên hệ *</label>
+            <input type="tel" name="so-dien-thoai" id="inp-sdt-khach" placeholder="VD: 0905888999" required />
+          </div>
+          <div class="nhom-input">
+            <label for="inp-ngay-den">Ngày đến quán *</label>
+            <input type="date" name="ngay-den" id="inp-ngay-den" required />
+          </div>
+          <div class="nhom-input">
+            <label for="inp-gio-den">Giờ dự kiến tới *</label>
+            <select name="gio-den" id="inp-gio-den">
+              <option value="17:00">17:00 (Mở cửa - Khung giờ vàng tặng mồi)</option>
+              <option value="17:30">17:30 (Khung giờ vàng tặng mồi)</option>
+              <option value="18:30">18:30 (Khung giờ vàng tặng mồi)</option>
+              <option value="19:30" selected>19:30 (Khung giờ vàng tặng mồi)</option>
+              <option value="20:30">20:30 (Tối nhộn nhịp)</option>
+              <option value="21:30">21:30 (Tăng 2 bắt đầu)</option>
+              <option value="22:30">22:30 (Khung nhậu đêm)</option>
+              <option value="23:30">23:30 (Nhậu khuya)</option>
+              <option value="00:30">00:30 (Qua nửa đêm)</option>
+              <option value="01:30">01:30 (Rạng sáng)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nhom-input">
+          <label for="inp-so-nguoi">Số lượng khách (Người) *</label>
+          <input type="number" name="so-nguoi" id="inp-so-nguoi" min="1" max="100" value="4" required />
+        </div>
+
+        <div class="nhom-input">
+          <label for="inp-ghi-chu">Dặn dò thêm cho quán (Tùy chọn)</label>
+          <textarea name="ghi-chu" id="inp-ghi-chu" rows="2" placeholder="VD: Cho mình bàn thoáng mát nhìn ra Ga Huế nhé..."></textarea>
+        </div>
+
+        <div id="thong-bao-loi-dat-ban" class="an-di" style="color:#f87171; font-weight:700; margin-bottom:12px;"></div>
+
+        <button type="submit" class="nut-chinh" style="width:100%; padding:15px; font-size:1.02rem;">
+          🏮 XÁC NHẬN ĐẶT BÀN NGAY
+        </button>
+      </form>
+
+      <!-- Cột phải: Thông tin quyền lợi khi đặt bàn trước & gọi món trực tiếp tại quán -->
+      <div class="hop-moi-chon-truoc">
+        <div>
+          <h3 style="color:var(--amber-gold); margin-bottom:10px;">🎁 Quyền Lợi Khi Đặt Bàn Trước</h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            Giữ chỗ hoàn toàn miễn phí — tới nơi có sẵn bàn đẹp thoáng mát đối diện Ga Huế không lo hết bàn giờ cao điểm:
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="dong-moi-chon" style="display:block;">
+              <div style="font-weight:700; color:var(--amber-gold); font-size:0.92rem;">🔥 Đặt bàn khung giờ vàng 17h – 20h</div>
+              <div style="font-size:0.84rem; color:var(--text-muted); margin-top:4px;">Tặng ngay mồi bén khai vị: <strong>Sụn gà rang muối, Nem chả tré</strong> hoặc <strong>Hến trộn</strong>.</div>
+            </div>
+            <div class="dong-moi-chon" style="display:block;">
+              <div style="font-weight:700; color:var(--amber-gold); font-size:0.92rem;">🎉 Tiệc Sinh Nhật & Họp Lớp Sinh Viên</div>
+              <div style="font-size:0.84rem; color:var(--text-muted); margin-top:4px;">Giảm <strong>10% tổng hóa đơn mồi</strong> và hỗ trợ ghép bàn dài ấm cúng.</div>
+            </div>
+            <div class="dong-moi-chon" style="display:block;">
+              <div style="font-weight:700; color:var(--amber-gold); font-size:0.92rem;">🌙 Mở cửa từ 17h – Hết khách</div>
+              <div style="font-size:0.84rem; color:var(--text-muted); margin-top:4px;">Phục vụ xuyên đêm cùng những chuyến tàu Ga Huế, anh em thoải mái lai rai không lo về sớm.</div>
+            </div>
+          </div>
+          <div id="khung-moi-chon-truoc" class="an-di"></div>
+        </div>
+
+        <div style="border-top:1px solid var(--border-subtle); padding-top:14px; margin-top:14px;">
+          <p style="font-size:0.84rem; color:var(--text-muted);">
+            🍻 Khi tới quán, nhân viên sẽ gửi thực đơn đầy đủ tại bàn để anh em thoải mái chọn món xào, nướng, lẩu um nóng hổi và Bia Huda lạnh nhé!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHÂN TRANG & ĐỊA CHỈ THẬT CỦA QUÁN (FOOTER) -->
+  <footer class="chan-trang">
+    <div class="khung-chan-trang">
+      <div>
+        <h3 style="color:var(--amber-gold); margin-bottom:8px;" id="footer-ten-quan">S.E Beer Đối diện Ga Huế</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;" id="footer-khau-hieu">
+          Sáu năm một góc phố quen đối diện Ga Huế — Điểm hẹn của mồi bén và tình anh em.
+        </p>
+      </div>
+      <div>
+        <h4 style="color:#fff; margin-bottom:8px;">📍 Địa Chỉ & Giờ Hoạt Động</h4>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Địa chỉ: <span id="footer-dia-chi">37–39 Bùi Thị Xuân (Đối diện Ga Huế), Phường Thuận Hóa, TP. Huế</span></p>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Giờ mở cửa: <strong style="color:var(--amber-gold);" id="footer-gio-mo">17h - Hết khách</strong></p>
+      </div>
+      <div>
+        <h4 style="color:#fff; margin-bottom:8px;">📞 Liên Hệ Đặt Bàn Nhanh</h4>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Hotline / Zalo: <strong style="color:var(--amber-gold);" id="footer-sdt">0333022068</strong></p>
+        <p style="margin-top:10px;">
+          <a id="footer-link-bando" href="https://www.google.com/maps/search/?api=1&query=S.E+Beer+37+Bui+Thi+Xuan+Hue" target="_blank" rel="noopener" class="nut-vien">🗺️ Mở Google Maps Chỉ Đường Tới Quán</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- THANH GIỎ MỒI CHỌN TRƯỚC NỔI THÔNG MINH -->
+  <div id="thanh-gio-chon-truoc" class="thanh-gio-noi an-di">
+    <div>
+      <strong style="color:var(--amber-gold);" id="gio-noi-so-luong">Đã chọn 0 món mồi</strong>
+    </div>
+    <a href="#dat-ban" class="nut-chinh" style="padding:8px 16px; font-size:0.85rem;">Gộp Vào Bàn Đặt →</a>
+  </div>
+
+  <!-- THANH NÚT BẤM NHANH CỐ ĐỊNH DƯỚI ĐÁY ĐIỆN THOẠI -->
+  <div id="thanh-lien-he-nhanh" class="thanh-lien-he-day">
+    <a id="nut-goi-ngay" href="tel:0333022068" class="nut-day goi-dien">📞 Gọi 0333.022.068</a>
+    <a id="nut-nhan-zalo" href="https://zalo.me/0333022068" target="_blank" rel="noopener" class="nut-day zalo">💬 Nhắn Zalo</a>
+    <a href="#dat-ban" class="nut-day dat-ban-ngay">🏮 Đặt Bàn</a>
+  </div>
+
+  <!-- HỘP THOẠI XÁC NHẬN ĐẶT BÀN DẠNG "VÉ TÀU ĐÊM S.E BEER" (KÈM NÚT TẢI VÉ & GỬI ZALO) -->
+  <div id="hop-thoai-thanh-cong" class="lop-phu-modal an-di">
+    <div class="hop-modal">
+      <span class="nhan-khu-vuc">ĐÃ XUẤT VÉ GIỮ BÀN THÀNH CÔNG</span>
+      <h3 style="color:var(--emerald-ok); font-size:1.3rem; margin-bottom:8px;">🎫 Vé Tàu Đêm S.E Beer Của Bạn!</h3>
+      <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:12px;">
+        Chúc mừng bạn đã giữ chỗ thành công! Bạn có thể <strong>Lưu ảnh vé tàu</strong> về máy để khoe với hội bạn hoặc bấm <strong>Gửi qua Zalo</strong> cho quán nhé:
+      </p>
+
+      <!-- Giao diện tấm vé tàu hoả cổ điển Ga Huế -->
+      <div class="ve-tau-se-beer" id="khung-ve-tau-hien-thi">
+        <div class="dau-ve-tau">
+          <span>🚂 VÉ LÊN TÀU NHẬU ĐÊM • S.E BEER</span>
+          <span id="ve-ma-don">MÃ VÉ: #SE2026</span>
+        </div>
+        <div class="than-ve-tau">
+          <div class="tuyen-ga-ve-tau">
+            <div class="cot-ga">
+              <div class="nhan-ga-nho">GA ĐI</div>
+              <div class="ten-ga-lon">Nhà Anh Em</div>
+            </div>
+            <div style="font-size:1.35rem; color:#b45309; font-weight:900;">━━🚂━━▶</div>
+            <div class="cot-ga ga-den">
+              <div class="nhan-ga-nho">GA ĐẾN (ĐỐI DIỆN GA HUẾ)</div>
+              <div class="ten-ga-lon">S.E Beer</div>
+            </div>
+          </div>
+
+          <div class="luoi-chi-tiet-ve">
+            <div class="o-chi-tiet-ve">
+              <span>Hành khách trưởng đoàn</span>
+              <strong id="ve-ten-khach">Anh Tuấn</strong>
+            </div>
+            <div class="o-chi-tiet-ve">
+              <span>Số điện thoại</span>
+              <strong id="ve-sdt-khach">0905888999</strong>
+            </div>
+            <div class="o-chi-tiet-ve">
+              <span>Giờ tàu khởi hành</span>
+              <strong id="ve-gio-ngay">19:30 • 22/10/2026</strong>
+            </div>
+            <div class="o-chi-tiet-ve">
+              <span>Số toa / Số lượng khách</span>
+              <strong id="ve-so-nguoi">Toa VIP • 4 Người</strong>
+            </div>
+          </div>
+        </div>
+        <div class="cuoi-ve-tau">
+          <span>📍 37–39 Bùi Thị Xuân, P. Thuận Hóa</span>
+          <span>📞 0333.022.068</span>
+        </div>
+      </div>
+
+      <pre id="noi-dung-tom-tat-don" class="an-di"></pre>
+
+      <div style="background:rgba(16, 185, 129, 0.12); border:1px solid rgba(16, 185, 129, 0.4); border-radius:8px; padding:10px 12px; margin-bottom:12px; font-size:0.84rem; color:#d1fae5;">
+        ✅ <strong>Đã tự động sao chép thông tin vé!</strong> Để chủ quán nhận được thông báo giữ bàn ngay lập tức trên điện thoại, bạn bấm <strong>Gửi qua Zalo</strong> hoặc <strong>Gửi SMS</strong> bên dưới nhé:
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="nut-chinh" style="width:100%; padding:13px;" onclick="saoChepVaMoZalo()">
+          💬 Bước Cuối: Bấm Mở Zalo & Dán Gửi Cho Quán (0333.022.068)
+        </button>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <a id="modal-gui-sms" href="sms:0333022068" class="nut-vien" style="flex:1; justify-content:center;">✉️ Gửi Tin Nhắn SMS</a>
+          <a id="modal-goi-hotline" href="tel:0333022068" class="nut-vien" style="flex:1; justify-content:center;">📞 Gọi 0333.022.068</a>
+          <button type="button" class="nut-vien" style="flex:1; justify-content:center;" onclick="taiAnhVeTauVeMay()">📸 Lưu Ảnh Vé</button>
+          <button type="button" class="nut-vien" onclick="dongHopThoaiThanhCong()">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HỘP THOẠI PHÓNG TO XEM RÕ 2 TRANG THỰC ĐƠN CHÍNH THỨC -->
+  <div id="hop-thoai-xem-menu" class="lop-phu-modal an-di" onclick="dongXemAnhMenuLon()">
+    <div class="hop-modal" style="max-width:760px; max-height:92vh; overflow-y:auto; padding:16px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong style="color:var(--amber-gold);" id="tieu-de-xem-menu">Thực đơn S.E Beer</strong>
+        <button type="button" class="nut-vien" style="padding:5px 12px;" onclick="dongXemAnhMenuLon()">✕ Đóng</button>
+      </div>
+      <img id="anh-menu-phong-to" src="" alt="Thực đơn S.E Beer phóng to" style="width:100%; height:auto; border-radius:8px; display:block;" />
+    </div>
+  </div>
+
+  <script src="logic.js"></script>
+  <script>
+    var kho = taoKhoDuLieu();
+    var nhomDangChon = "TAT_CA";
+    var donVuaDatGanNhat = null;
+
+    function khoiTaoNgayMacDinh() {
+      var oNgay = document.getElementById("inp-ngay-den");
+      if (oNgay && !oNgay.value) {
+        var homNay = new Date();
+        var yyyy = homNay.getFullYear();
+        var mm = String(homNay.getMonth() + 1).padStart(2, "0");
+        var dd = String(homNay.getDate()).padStart(2, "0");
+        oNgay.value = yyyy + "-" + mm + "-" + dd;
+      }
+    }
+
+    // Gửi đơn đặt bàn lên Netlify Forms + Hàm trung gian máy chủ (/.netlify/functions/gui-don)
+    // đảm bảo chủ quán luôn nhận được đơn mà không bao giờ lộ Telegram Bot Token ngoài trình duyệt
+    function dongBoDonVeMayChu(donDatBan) {
+      var tt = kho.layThongTinQuan();
+
+      // 1. Gửi qua hàm trung gian máy chủ Netlify Function (giữ kín Token ở phía server)
+      try {
+        fetch("/.netlify/functions/gui-don", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            donDatBan: donDatBan,
+            noiDungTinNhan: donDatBan.noiDungTinNhan,
+            firebaseUrl: tt.firebaseUrl || ""
+          })
+        }).catch(function() {});
+      } catch (e) {}
+
+      // 2. Gửi vào Netlify Forms tích hợp sẵn (tự động lưu đơn trên bảng điều khiển Netlify của chủ quán)
+      try {
+        var duLieuForm = new URLSearchParams();
+        duLieuForm.append("form-name", "dat-ban-se-beer");
+        duLieuForm.append("ten-khach", donDatBan.tenKhach);
+        duLieuForm.append("so-dien-thoai", donDatBan.soDienThoai);
+        duLieuForm.append("ngay-den", donDatBan.ngayDen);
+        duLieuForm.append("gio-den", donDatBan.gioDen);
+        duLieuForm.append("so-nguoi", String(donDatBan.soNguoi));
+        duLieuForm.append("ghi-chu", donDatBan.ghiChu || "");
+        duLieuForm.append("moi-dan-truoc", donDatBan.noiDungTinNhan);
+
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: duLieuForm.toString()
+        }).catch(function() {});
+      } catch (e) {}
+
+      // 3. Nếu chủ quán có gắn link Firebase Realtime DB thì đồng bộ trực tiếp sang trang admin.html
+      if (tt.firebaseUrl && donDatBan.maDon) {
+        try {
+          var base = String(tt.firebaseUrl).replace(/\/+$/, "");
+          fetch(base + "/donDatBan/" + encodeURIComponent(donDatBan.maDon) + ".json", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(donDatBan)
+          }).catch(function() {});
+        } catch (e) {}
+      }
+    }
+
+    function veThongTinThuongHieu() {
+      var tt = kho.layThongTinQuan();
+      document.title = tt.tenQuan + " — " + tt.soNamHoatDong + " Năm Tinh Hoa Mồi Bén & Nhậu Khuya";
+      document.getElementById("huy-hieu-nam").textContent = "S.E";
+      document.getElementById("header-ten-quan").textContent = tt.tenQuan;
+      document.getElementById("hero-ten-quan").textContent = tt.tenQuan;
+      document.getElementById("hero-phu-de").textContent = tt.phuDeThuongHieu;
+      document.getElementById("hero-khau-hieu").textContent = tt.khauHieu;
+      document.getElementById("hero-gio-mo").textContent = tt.gioMoCua;
+      document.getElementById("hero-sdt").textContent = tt.soDienThoai;
+      document.getElementById("noi-dung-cau-chuyen").textContent = tt.cauChuyen6Nam;
+      document.getElementById("so-nam-hien-thi").textContent = tt.soNamHoatDong + "+ Năm";
+
+      document.getElementById("footer-ten-quan").textContent = tt.tenQuan;
+      document.getElementById("footer-khau-hieu").textContent = tt.khauHieu;
+      document.getElementById("footer-dia-chi").textContent = tt.diaChi;
+      document.getElementById("footer-gio-mo").textContent = tt.gioMoCua;
+      document.getElementById("footer-sdt").textContent = tt.soDienThoai;
+      document.getElementById("footer-link-bando").href = tt.linkBanDo || "https://www.google.com/maps/search/?api=1&query=S.E+Beer+37+Bui+Thi+Xuan+Hue";
+
+      document.getElementById("header-nut-goi").href = "tel:" + tt.soDienThoai;
+      document.getElementById("header-nut-goi").textContent = "📞 " + tt.soDienThoai;
+      document.getElementById("nut-goi-ngay").href = "tel:" + tt.soDienThoai;
+      document.getElementById("modal-goi-hotline").href = "tel:" + tt.soDienThoai;
+      document.getElementById("nut-nhan-zalo").href = "https://zalo.me/" + (tt.soZalo || tt.soDienThoai);
+    }
+
+    function veDanhSachMonAn() {
+      var dsMon = kho.layDanhSachMon(nhomDangChon, false);
+      var khung = document.getElementById("luoi-mon-an");
+      var khungBangTau = document.getElementById("bang-gio-tau-mon");
+      var html = "";
+      var htmlBangTau =
+        '<div class="dong-tau tieu-de-cot">' +
+          '<div>CHUYẾN</div>' +
+          '<div>MÓN MỒI TƯỢNG TRƯNG</div>' +
+          '<div>HƯƠNG VỊ ĐẶC TRƯNG</div>' +
+          '<div style="text-align:right;">TÌNH TRẠNG</div>' +
+        '</div>';
+
+      var goiYHuongVi = [
+        "Cay nồng sả ớt • Bén bia",
+        "Hạt cơm giòn • Chắc bụng",
+        "Xúc bánh tráng • Vị Huế",
+        "Giòn sần sật • Mồi tủ #1",
+        "Chua cay nóng hổi • Đêm mưa",
+        "Than hồng xém cạnh • Muối ớt xanh"
+      ];
+
+      for (var i = 0; i < dsMon.length; i++) {
+        var m = dsMon[i];
+        var maTau = "SE" + (i + 1);
+        var nhan = "";
+        if (m.banChay) nhan += '<span class="tag-mon-tu">🔥 Món Tủ S.E Beer</span>';
+        if (m.monMoi) nhan += '<span class="tag-mon-moi">✨ Món Mới</span>';
+
+        var trangThaiTau = m.hetHang
+          ? '<span class="flap-huy-chuyen">🔴 HỦY CHUYẾN</span>'
+          : '<span class="flap-dang-phuc-vu">🟢 ĐANG PHỤC VỤ</span>';
+
+        htmlBangTau +=
+          '<div class="dong-tau">' +
+            '<div class="ma-tau-flap">' + maTau + '</div>' +
+            '<div class="ten-mon-flap">→ ' + m.tenMon.toUpperCase() + '</div>' +
+            '<div class="dac-diem-flap">' + (goiYHuongVi[i] || "Món đặc trưng tại quán") + '</div>' +
+            '<div class="trang-thai-flap">' + trangThaiTau + '</div>' +
+          '</div>';
+
+        html +=
+          '<article class="the-mon-an">' +
+            '<div class="khung-anh-mon">' +
+              '<img src="' + m.hinhAnh + '" alt="' + m.tenMon + '" loading="lazy" />' +
+              '<div class="nhan-tren-anh"><span class="tag-mon-moi">' + maTau + '</span>' + nhan + '</div>' +
+            '</div>' +
+            '<div class="than-the-mon">' +
+              '<h3 class="ten-mon-an">' + m.tenMon + '</h3>' +
+              '<p class="mo-ta-mon-an">' + m.moTa + '</p>' +
+              '<div class="chan-the-mon">' +
+                '<div class="don-vi-mon" style="color:var(--amber-gold); font-weight:700;">🚂 Chuyến ' + maTau + ' • Món tiêu biểu tại quán</div>' +
+              '</div>' +
+            '</div>' +
+          '</article>';
+      }
+      if (khungBangTau) khungBangTau.innerHTML = htmlBangTau;
+      khung.innerHTML = html;
+    }
+
+    function veGioChonTruoc() {
+      kho.xoaSachGioChonTruoc();
+      var thanhNoi = document.getElementById("thanh-gio-chon-truoc");
+      if (thanhNoi) thanhNoi.classList.add("an-di");
+    }
+
+    function veKhongGianVaUuDai() {
+      var dsAnh = kho.layDanhSachAnhKhongGian();
+      var htmlAnh = "";
+      for (var i = 0; i < dsAnh.length; i++) {
+        var a = dsAnh[i];
+        htmlAnh +=
+          '<div class="the-khong-gian">' +
+            '<img src="' + a.hinhAnh + '" alt="' + a.tieuDe + '" loading="lazy" />' +
+            '<div class="lop-phu-khong-gian">' +
+              '<h3>' + a.tieuDe + '</h3>' +
+              '<p>' + a.moTa + '</p>' +
+            '</div>' +
+          '</div>';
+      }
+      document.getElementById("luoi-anh-khong-gian").innerHTML = htmlAnh;
+
+      var dsUuDai = kho.layDanhSachUuDai(true);
+      var htmlUD = "";
+      for (var j = 0; j < dsUuDai.length; j++) {
+        var u = dsUuDai[j];
+        htmlUD +=
+          '<div class="the-uu-dai">' +
+            '<span class="nhan-uu-dai">' + u.nhanUuDai + '</span>' +
+            '<h3>' + u.tieuDe + '</h3>' +
+            '<p>' + u.moTa + '</p>' +
+          '</div>';
+      }
+      document.getElementById("luoi-uu-dai-dem").innerHTML = htmlUD;
+    }
+
+    // Đèn báo trạng thái quán theo giờ thật & Đồng hồ đếm ngược "Chuyến tàu ưu đãi 17h-20h"
+    function capNhatTinHieuSanGa() {
+      var bayGio = new Date();
+      var gio = bayGio.getHours();
+      var phut = bayGio.getMinutes();
+
+      var chamDen = document.getElementById("cham-den-quan");
+      var chuTrangThai = document.getElementById("chu-trang-thai-quan");
+
+      // Quán mở từ 17:00 chiều tới khuya hết khách (~03:00 sáng)
+      var dangMoCua = (gio >= 17 || gio < 3);
+      if (chamDen && chuTrangThai) {
+        if (dangMoCua) {
+          chamDen.className = "cham-den dang-mo";
+          chuTrangThai.textContent = "🟢 Quán đang mở cửa đón khách (17h – Hết khách)";
+        } else {
+          chamDen.className = "cham-den dang-nghi";
+          var phutConLaiMo = (17 * 60) - (gio * 60 + phut);
+          var hMo = Math.floor(phutConLaiMo / 60);
+          var mMo = phutConLaiMo % 60;
+          chuTrangThai.textContent = "🔴 Bếp đang nghỉ – Mở lại lúc 17:00 (còn " + hMo + "h " + mMo + "p)";
+        }
+      }
+
+      // Đồng hồ đếm ngược tới hoặc trong khung giờ vàng 17h - 20h tặng mồi
+      var nhanTau = document.getElementById("nhan-tau-uu-dai");
+      var oDemNguoc = document.getElementById("so-dem-nguoc-uu-dai");
+      if (nhanTau && oDemNguoc) {
+        var mucTieu = new Date(bayGio.getTime());
+        if (gio >= 17 && gio < 20) {
+          nhanTau.textContent = "🔥 Đang trong Giờ Vàng tặng mồi (còn lại):";
+          mucTieu.setHours(20, 0, 0, 0);
+        } else {
+          nhanTau.textContent = "🚂 Chuyến tàu Giờ Vàng 17h–20h khởi hành sau:";
+          if (gio >= 20) {
+            mucTieu.setDate(mucTieu.getDate() + 1);
+          }
+          mucTieu.setHours(17, 0, 0, 0);
+        }
+        var giayConLai = Math.max(0, Math.floor((mucTieu.getTime() - bayGio.getTime()) / 1000));
+        var hh = String(Math.floor(giayConLai / 3600)).padStart(2, "0");
+        var mm = String(Math.floor((giayConLai % 3600) / 60)).padStart(2, "0");
+        var ss = String(giayConLai % 60).padStart(2, "0");
+        oDemNguoc.textContent = hh + ":" + mm + ":" + ss;
+      }
+    }
+
+    // Tự động đọc thời tiết thật tại TP. Huế (Open-Meteo API miễn phí, không cần khóa API)
+    function taiThoiTietThucTeHue() {
+      var hopTT = document.getElementById("hop-thoi-tiet-hue");
+      var thongDiepUD = document.getElementById("thong-diep-uu-dai-thoi-tiet");
+      try {
+        fetch("https://api.open-meteo.com/v1/forecast?latitude=16.4637&longitude=107.5909&current_weather=true")
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (!data || !data.current_weather) return;
+            var nhietDo = Math.round(data.current_weather.temperature);
+            var maThoiTiet = Number(data.current_weather.weathercode || 0);
+            var dangMua = maThoiTiet >= 51;
+            if (dangMua) {
+              hopTT.innerHTML = "<span>🌧️ Huế đang mưa (" + nhietDo + "°C) → Quá hợp ngồi Lẩu Hải Sản nóng hổi!</span>";
+              if (thongDiepUD) {
+                thongDiepUD.textContent = "🌧️ Trời Huế đang mưa mát (" + nhietDo + "°C) — Quán đã kéo mái che ấm cúng, đặt bàn khung 17h–20h tặng ngay Sụn gà rang muối / Nem chả tré / Hến trộn!";
+              }
+            } else {
+              hopTT.innerHTML = "<span>🌙 Thời tiết Ga Huế: " + nhietDo + "°C thoáng mát → Cực hợp ngồi ngắm tàu & cụng Huda lạnh!</span>";
+            }
+          })
+          .catch(function() {
+            if (hopTT) hopTT.innerHTML = "<span>🌙 Ga Huế đêm nay: Gió mát, bếp than S.E Beer đỏ lửa đón anh em!</span>";
+          });
+      } catch (e) {}
+    }
+
+    // Phát âm thanh tiếng còi tàu đêm Ga Huế ngân vang (Web Audio API - khách tự bấm mới kêu)
+    function phatTiengCoiTauGaHue() {
+      var nut = document.getElementById("nut-coi-tau");
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        var ctx = new AudioCtx();
+        var now = ctx.currentTime;
+
+        function taoAmCoi(tanSo, batDau, thoiLuong) {
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(tanSo, batDau);
+          osc.frequency.exponentialRampToValueAtTime(tanSo * 0.96, batDau + thoiLuong);
+
+          var filter = ctx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(680, batDau);
+
+          gain.gain.setValueAtTime(0.001, batDau);
+          gain.gain.linearRampToValueAtTime(0.12, batDau + 0.18);
+          gain.gain.setValueAtTime(0.12, batDau + thoiLuong - 0.35);
+          gain.gain.exponentialRampToValueAtTime(0.0001, batDau + thoiLuong);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(batDau);
+          osc.stop(batDau + thoiLuong);
+        }
+
+        // Hợp âm còi tàu Thống Nhất trầm ấm vọng lại từ sân Ga Huế
+        taoAmCoi(277.18, now, 1.4);
+        taoAmCoi(349.23, now, 1.4);
+        taoAmCoi(277.18, now + 1.65, 2.1);
+        taoAmCoi(349.23, now + 1.65, 2.1);
+
+        if (nut) {
+          nut.classList.add("dang-bat");
+          nut.textContent = "🚂 Đang ngân vang tiếng còi tàu đêm Ga Huế...";
+          setTimeout(function() {
+            nut.classList.remove("dang-bat");
+            nut.textContent = "🚂 Bấm Nghe Tiếng Còi Tàu Đêm Ga Huế";
+          }, 3800);
+        }
+      } catch (e) {}
+    }
+
+    function batTatHieuUngMuaHue() {
+      var lopMua = document.getElementById("lop-mua-hue");
+      var nutMua = document.getElementById("nut-mua-hue");
+      if (!lopMua) return;
+      var dangBat = lopMua.classList.toggle("dang-mua");
+      if (nutMua) {
+        nutMua.classList.toggle("dang-bat", dangBat);
+        nutMua.textContent = dangBat ? "🌧️ Đang Bật Mưa Đêm Huế (Bấm Để Tắt)" : "🌧️ Bật Không Khí Mưa Đêm Huế";
+      }
+    }
+
+    function xuLyGuiDonDatBan(suKien) {
+      if (suKien) suKien.preventDefault();
+      var hopLoi = document.getElementById("thong-bao-loi-dat-ban");
+      hopLoi.classList.add("an-di");
+
+      var thongTin = {
+        tenKhach: document.getElementById("inp-ten-khach").value,
+        soDienThoai: document.getElementById("inp-sdt-khach").value,
+        ngayDen: document.getElementById("inp-ngay-den").value,
+        gioDen: document.getElementById("inp-gio-den").value,
+        soNguoi: document.getElementById("inp-so-nguoi").value,
+        ghiChu: document.getElementById("inp-ghi-chu").value
+      };
+
+      var kq = kho.taoDonDatBan(thongTin, false);
+      if (!kq.thanhCong) {
+        hopLoi.textContent = "⚠️ " + kq.thongBao;
+        hopLoi.classList.remove("an-di");
+        return;
+      }
+
+      donVuaDatGanNhat = kq.donDatBan;
+      dongBoDonVeMayChu(kq.donDatBan);
+
+      document.getElementById("form-dat-ban").reset();
+      khoiTaoNgayMacDinh();
+      veGioChonTruoc();
+
+      // Điền thông tin vào tấm "Vé Tàu Đêm S.E Beer"
+      var d = kq.donDatBan;
+      document.getElementById("ve-ma-don").textContent = "MÃ VÉ: #" + d.maDon;
+      document.getElementById("ve-ten-khach").textContent = d.tenKhach;
+      document.getElementById("ve-sdt-khach").textContent = d.soDienThoai;
+      document.getElementById("ve-gio-ngay").textContent = d.gioDen + " • " + d.ngayDen;
+      document.getElementById("ve-so-nguoi").textContent = "Toa S.E • " + d.soNguoi + " Khách";
+
+      // Tự động điền sẵn nội dung tin nhắn SMS và sao chép vào bộ nhớ tạm
+      var nutSms = document.getElementById("modal-gui-sms");
+      if (nutSms) {
+        var noiDungSms = "Dat ban S.E Beer: " + d.tenKhach + " (" + d.soDienThoai + ") - " + d.soNguoi + " nguoi - luc " + d.gioDen + " ngay " + d.ngayDen + (d.ghiChu ? " - Ghi chu: " + d.ghiChu : "");
+        var dauHoiSms = /iPad|iPhone|iPod/.test(navigator.userAgent || "") ? "&" : "?";
+        nutSms.href = "sms:0333022068" + dauHoiSms + "body=" + encodeURIComponent(noiDungSms);
+      }
+      if (navigator.clipboard && d.noiDungTinNhan) {
+        navigator.clipboard.writeText(d.noiDungTinNhan).catch(function() {});
+      }
+
+      document.getElementById("noi-dung-tom-tat-don").textContent = d.noiDungTinNhan;
+      document.getElementById("hop-thoai-thanh-cong").classList.remove("an-di");
+    }
+
+    // Vẽ và tải tấm Vé Tàu Đêm S.E Beer thành ảnh PNG sắc nét để khách lưu về điện thoại / chia sẻ
+    function taiAnhVeTauVeMay() {
+      var d = donVuaDatGanNhat || {
+        maDon: "SE2026",
+        tenKhach: "Khách Quý",
+        soDienThoai: "0333022068",
+        gioDen: "19:30",
+        ngayDen: "Hôm nay",
+        soNguoi: 4
+      };
+      try {
+        var canvas = document.createElement("canvas");
+        canvas.width = 800;
+        canvas.height = 420;
+        var ctx = canvas.getContext("2d");
+
+        // Nền vé tàu kem cổ điển
+        ctx.fillStyle = "#fdf8ee";
+        ctx.fillRect(0, 0, 800, 420);
+        ctx.strokeStyle = "#d97706";
+        ctx.lineWidth = 8;
+        ctx.strokeRect(4, 4, 792, 412);
+
+        // Đầu vé tàu
+        ctx.fillStyle = "#92400e";
+        ctx.fillRect(8, 8, 784, 68);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 24px sans-serif";
+        ctx.fillText("🚂 VÉ LÊN TÀU NHẬU ĐÊM • S.E BEER ĐỐI DIỆN GA HUẾ", 28, 50);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#fde68a";
+        ctx.fillText("#" + d.maDon, 768, 50);
+
+        // Tuyến ga
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#78350f";
+        ctx.font = "bold 16px sans-serif";
+        ctx.fillText("GA ĐI: NHÀ ANH EM   ━━━━━🚂━━━━━▶   GA ĐẾN: S.E BEER (37-39 BÙI THỊ XUÂN)", 28, 125);
+
+        // Chi tiết hành khách
+        ctx.fillStyle = "#1c150e";
+        ctx.font = "bold 22px sans-serif";
+        ctx.fillText("• Hành khách: " + d.tenKhach + " (" + d.soDienThoai + ")", 28, 185);
+        ctx.fillText("• Giờ tàu khởi hành: " + d.gioDen + " ngày " + d.ngayDen, 28, 230);
+        ctx.fillText("• Số toa / Số lượng: Toa S.E • " + d.soNguoi + " người", 28, 275);
+        ctx.fillStyle = "#b45309";
+        ctx.font = "bold 18px sans-serif";
+        ctx.fillText("🎁 Đặt khung 17h–20h: Tặng Sụn gà rang muối / Nem chả tré / Hến trộn", 28, 325);
+
+        // Chân vé
+        ctx.fillStyle = "#78350f";
+        ctx.font = "bold 16px monospace";
+        ctx.fillText("📍 37–39 Bùi Thị Xuân, Phường Thuận Hóa, TP. Huế  |  📞 Hotline/Zalo: 0333022068", 28, 385);
+
+        var link = document.createElement("a");
+        link.download = "Ve-Tau-SE-Beer-" + d.maDon + ".png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      } catch (e) {}
+    }
+
+    function dongHopThoaiThanhCong() {
+      document.getElementById("hop-thoai-thanh-cong").classList.add("an-di");
+    }
+
+    function moXemAnhMenuLon(duongDanAnh, tieuDe) {
+      var modal = document.getElementById("hop-thoai-xem-menu");
+      var img = document.getElementById("anh-menu-phong-to");
+      var lbl = document.getElementById("tieu-de-xem-menu");
+      if (modal && img) {
+        img.src = duongDanAnh;
+        if (lbl) lbl.textContent = tieuDe || "Thực đơn S.E Beer Đối diện Ga Huế";
+        modal.classList.remove("an-di");
+      }
+    }
+
+    function dongXemAnhMenuLon() {
+      var modal = document.getElementById("hop-thoai-xem-menu");
+      if (modal) modal.classList.add("an-di");
+    }
+
+    function saoChepVaMoZalo() {
+      var tt = kho.layThongTinQuan();
+      var noiDung = donVuaDatGanNhat ? donVuaDatGanNhat.noiDungTinNhan : "";
+      if (navigator.clipboard && noiDung) {
+        navigator.clipboard.writeText(noiDung).catch(function() {});
+      }
+      window.open("https://zalo.me/" + (tt.soZalo || tt.soDienThoai), "_blank");
+    }
+
+    // Khởi chạy trang khách hàng & Chủ đề Sân Ga Đêm
+    khoiTaoNgayMacDinh();
+    veThongTinThuongHieu();
+    veDanhSachMonAn();
+    veGioChonTruoc();
+    veKhongGianVaUuDai();
+    capNhatTinHieuSanGa();
+    setInterval(capNhatTinHieuSanGa, 1000);
+    taiThoiTietThucTeHue();
+  </script>
+</body>
+</html>

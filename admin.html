@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Quản Trị Nội Bộ — S.E Beer Đối diện Ga Huế</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- THANH ĐẦU TRANG QUẢN TRỊ RIÊNG BIỆT -->
+  <header class="thanh-dieu-huong">
+    <div class="khung-dieu-huong">
+      <a href="index.html" class="thuong-hieu-logo">
+        <div class="huy-hieu-6-nam">S.E</div>
+        <div>
+          <div class="ten-quan-header">QUẢN TRỊ NỘI BỘ • S.E BEER</div>
+          <div class="phu-de-header">37–39 BÙI THỊ XUÂN • ĐỐI DIỆN GA HUẾ</div>
+        </div>
+      </a>
+      <div class="nhom-nut-header">
+        <a href="index.html" class="nut-vien">← Về Trang Khách Hàng</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HỘP THOẠI ĐĂNG NHẬP QUẢN LÝ (KHÔNG HIỂN THỊ MÃ MẶC ĐỊNH CÔNG KHAI) -->
+  <div id="hop-thoai-pin" class="lop-phu-modal">
+    <div class="hop-modal">
+      <h3 style="color:var(--amber-gold); margin-bottom:8px;">🔐 Đăng Nhập Trang Quản Lý S.E Beer</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">
+        Trang dành riêng cho chủ quán & quản lý. Vui lòng nhập mật khẩu quản trị để tiếp tục.
+      </p>
+      <div class="nhom-input">
+        <input type="password" id="inp-pin-quan-ly" placeholder="Nhập mật khẩu quản trị..." style="font-size:1.2rem; text-align:center; letter-spacing:4px;" />
+      </div>
+      <div id="loi-pin-admin" class="an-di" style="color:#f87171; font-size:0.86rem; margin-bottom:10px;">Mật khẩu quản trị chưa đúng, vui lòng thử lại!</div>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <a href="index.html" class="nut-vien">Quay lại</a>
+        <button type="button" class="nut-chinh" onclick="xacNhanMoQuanLy()">Đăng Nhập</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BẢNG ĐIỀU KHIỂN CHỦ QUÁN -->
+  <section id="khu-vuc-quan-ly" class="khung-quan-ly an-di">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>
+        <span class="nhan-khu-vuc">TRANG QUẢN TRỊ RIÊNG BIỆT (ĐÃ CHẶN GOOGLE INDEX)</span>
+        <h2 style="color:var(--amber-gold); font-size:1.5rem;">🏮 Bảng Điều Khiển S.E Beer Đối Diện Ga Huế</h2>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button type="button" class="nut-vien" onclick="taiDonTuDamMay()">🔄 Làm Mới Đơn Từ Đám Mây</button>
+        <button type="button" class="nut-vien" onclick="phatChuongBaoDonMoi()">🔔 Thử Chuông Báo</button>
+      </div>
+    </div>
+
+    <div class="con-so-6-nam" id="thong-ke-admin" style="margin-top:16px;"></div>
+
+    <div class="thanh-tab-admin">
+      <button type="button" class="nut-nhom-mon dang-chon" id="tab-btn-don" onclick="chuyenTabAdmin('DON_DAT_BAN')">📋 Đơn Đặt Bàn</button>
+      <button type="button" class="nut-nhom-mon" id="tab-btn-mon" onclick="chuyenTabAdmin('THUC_DON')">🍖 Quản Lý Món Tượng Trưng</button>
+      <button type="button" class="nut-nhom-mon" id="tab-btn-uudai" onclick="chuyenTabAdmin('UU_DAI')">🎁 Chương Trình Ưu Đãi</button>
+      <button type="button" class="nut-nhom-mon" id="tab-btn-caidat" onclick="chuyenTabAdmin('CAI_DAT')">⚙️ Thông Tin Quán & Đồng Bộ Đám Mây</button>
+    </div>
+
+    <!-- Tab 1: Đơn đặt bàn -->
+    <div id="admin-tab-don">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="nut-vien" onclick="locDonAdmin('TAT_CA')">Tất cả đơn</button>
+          <button type="button" class="nut-vien" onclick="locDonAdmin('CHO_XAC_NHAN')">⏳ Chờ xác nhận</button>
+          <button type="button" class="nut-vien" onclick="locDonAdmin('DA_XAC_NHAN')">✅ Đã giữ bàn</button>
+        </div>
+        <span style="font-size:0.84rem; color:var(--emerald-ok);">● Tự động nhận đơn từ Netlify Forms, Firebase & Telegram</span>
+      </div>
+      <div id="danh-sach-don-admin"></div>
+    </div>
+
+    <!-- Tab 2: Món tượng trưng -->
+    <div id="admin-tab-mon" class="an-di">
+      <div class="the-don-admin" style="margin-bottom:20px;">
+        <h3 style="color:var(--amber-gold); margin-bottom:12px;">➕ Thêm Món Minh Họa Mới</h3>
+        <div class="luoi-input">
+          <div class="nhom-input">
+            <label>Tên món ăn *</label>
+            <input type="text" id="adm-ten-mon" placeholder="VD: Ếch Xào Sả" />
+          </div>
+          <div class="nhom-input">
+            <label>Đường dẫn ảnh món ăn</label>
+            <input type="text" id="adm-anh-mon" placeholder="images/ech-xao-sa.jpg" />
+          </div>
+        </div>
+        <div class="nhom-input">
+          <label>Mô tả hấp dẫn của món</label>
+          <input type="text" id="adm-mota-mon" placeholder="VD: Thơm lừng sả ớt cay nồng..." />
+        </div>
+        <button type="button" class="nut-chinh" onclick="xuLyThemMonAdmin()">+ Lưu Món Minh Họa</button>
+      </div>
+      <div id="danh-sach-mon-admin"></div>
+    </div>
+
+    <!-- Tab 3: Ưu đãi -->
+    <div id="admin-tab-uudai" class="an-di">
+      <div class="the-don-admin" style="margin-bottom:18px;">
+        <h3 style="color:var(--amber-gold); margin-bottom:10px;">➕ Đăng Chương Trình Khuyến Mãi Đêm Mới</h3>
+        <div class="luoi-input">
+          <div class="nhom-input">
+            <label>Tiêu đề ưu đãi *</label>
+            <input type="text" id="adm-tieude-uudai" placeholder="VD: Đặt bàn trước 17h - 20h tặng mồi khai vị" />
+          </div>
+          <div class="nhom-input">
+            <label>Nhãn nổi bật</label>
+            <input type="text" id="adm-nhan-uudai" value="KHUNG GIỜ VÀNG" />
+          </div>
+        </div>
+        <div class="nhom-input">
+          <label>Chi tiết chương trình</label>
+          <input type="text" id="adm-mota-uudai" placeholder="Tặng sụn gà rang muối, nem chả tré, hến trộn..." />
+        </div>
+        <button type="button" class="nut-chinh" onclick="xuLyThemUuDaiAdmin()">+ Đăng Ưu Đãi</button>
+      </div>
+      <div id="danh-sach-uudai-admin"></div>
+    </div>
+
+    <!-- Tab 4: Cài đặt quán (Không lưu Telegram Token ở trình duyệt nữa mà hướng dẫn cài trên máy chủ Netlify) -->
+    <div id="admin-tab-caidat" class="an-di">
+      <div class="the-don-admin">
+        <h3 style="color:var(--amber-gold); margin-bottom:14px;">🏪 Thông Tin Quán & Đồng Bộ Đơn Đặt Bàn</h3>
+        <div class="luoi-input">
+          <div class="nhom-input">
+            <label>Tên quán nhậu</label>
+            <input type="text" id="cd-ten-quan" />
+          </div>
+          <div class="nhom-input">
+            <label>Số năm hoạt động</label>
+            <input type="number" id="cd-so-nam" />
+          </div>
+          <div class="nhom-input">
+            <label>Số điện thoại Hotline thật</label>
+            <input type="text" id="cd-sdt" />
+          </div>
+          <div class="nhom-input">
+            <label>Số Zalo nhận đơn đặt bàn</label>
+            <input type="text" id="cd-zalo" />
+          </div>
+          <div class="nhom-input">
+            <label>Giờ mở cửa nhậu khuya</label>
+            <input type="text" id="cd-gio-mo" />
+          </div>
+          <div class="nhom-input">
+            <label>Đổi mật khẩu quản trị mới</label>
+            <input type="password" id="cd-ma-pin" placeholder="Nhập mật khẩu mới..." />
+          </div>
+        </div>
+        <div class="nhom-input">
+          <label>Địa chỉ thật của quán</label>
+          <input type="text" id="cd-dia-chi" />
+        </div>
+        <div class="nhom-input">
+          <label>Link Google Maps ghim đúng quán</label>
+          <input type="text" id="cd-link-map" />
+        </div>
+        <div class="nhom-input">
+          <label>Câu chuyện 6 năm của quán</label>
+          <textarea id="cd-cau-chuyen" rows="3"></textarea>
+        </div>
+
+        <hr style="border:none; border-top:1px solid var(--border-subtle); margin:18px 0;" />
+        <h4 style="color:var(--amber-gold); margin-bottom:8px;">☁️ Đồng bộ đơn đặt bàn từ máy khách về máy chủ quán (Firebase / Netlify)</h4>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:12px;">
+          • <strong>Cách 1 (Đã tự động bật sẵn):</strong> Mọi đơn khách đặt đều tự động gửi lên mục <strong>Forms</strong> trong tài khoản Netlify của bạn và mở Zalo gửi thẳng về số <strong>0333022068</strong>.<br />
+          • <strong>Cách 2 (Bảo mật Token trên máy chủ):</strong> Cài biến môi trường <code>TELEGRAM_BOT_TOKEN</code> và <code>TELEGRAM_CHAT_ID</code> trong mục <em>Site configuration → Environment variables</em> của Netlify để hàm máy chủ <code>/.netlify/functions/gui-don</code> bắn tin nhắn mà không bao giờ lộ Token ngoài trình duyệt.<br />
+          • <strong>Cách 3 (Đồng bộ trực tiếp lên bảng này qua 4G):</strong> Dán đường dẫn Firebase Realtime Database vào ô dưới đây:
+        </p>
+        <div class="nhom-input">
+          <label>Đường dẫn đồng bộ đám mây Firebase Realtime DB</label>
+          <input type="text" id="cd-firebase-url" placeholder="https://se-beer-hue-default-rtdb.firebaseio.com" />
+        </div>
+
+        <button type="button" class="nut-chinh" onclick="luuCaiDatQuanAdmin()">💾 Lưu Toàn Bộ Cài Đặt Quán</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="logic.js"></script>
+  <script>
+    var kho = taoKhoDuLieu();
+    var trangThaiDonLocAdmin = "TAT_CA";
+    var pinPhienHienTai = "";
+
+    function phatChuongBaoDonMoi() {
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        var ctx = new AudioCtx();
+        var notes = [659.25, 880, 1046.5];
+        for (var i = 0; i < notes.length; i++) {
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.value = notes[i];
+          gain.gain.setValueAtTime(0.18, ctx.currentTime + i * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.14 + 0.25);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.14);
+          osc.stop(ctx.currentTime + i * 0.14 + 0.25);
+        }
+      } catch (e) {}
+    }
+
+    function xacNhanMoQuanLy() {
+      var pinNhap = document.getElementById("inp-pin-quan-ly").value;
+      if (!kho.xacThucPin(pinNhap)) {
+        document.getElementById("loi-pin-admin").classList.remove("an-di");
+        return;
+      }
+      pinPhienHienTai = pinNhap;
+      document.getElementById("hop-thoai-pin").classList.add("an-di");
+      document.getElementById("khu-vuc-quan-ly").classList.remove("an-di");
+      veTrangQuanLy();
+      taiDonTuDamMay();
+    }
+
+    function taiDonTuDamMay() {
+      var tt = kho.layThongTinQuan();
+      if (!tt.firebaseUrl) return;
+      var base = String(tt.firebaseUrl).replace(/\/+$/, "");
+      fetch(base + "/donDatBan.json")
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!data || typeof data !== "object") return;
+          var trangThaiHienTai = kho.xuatToanBoTrangThai();
+          var maDaCo = {};
+          for (var i = 0; i < trangThaiHienTai.danhSachDonDatBan.length; i++) {
+            maDaCo[trangThaiHienTai.danhSachDonDatBan[i].maDon] = true;
+          }
+          var coDonMoi = false;
+          Object.keys(data).forEach(function(maDon) {
+            if (!maDaCo[maDon] && data[maDon] && data[maDon].tenKhach) {
+              trangThaiHienTai.danhSachDonDatBan.unshift(data[maDon]);
+              coDonMoi = true;
+            }
+          });
+          if (coDonMoi) {
+            kho.nhapToanBoTrangThai(trangThaiHienTai);
+            phatChuongBaoDonMoi();
+            veTrangQuanLy();
+          }
+        })
+        .catch(function() {});
+    }
+
+    function chuyenTabAdmin(tenTab) {
+      var dsTab = [
+        { ma: "DON_DAT_BAN", idKhung: "admin-tab-don", idNut: "tab-btn-don" },
+        { ma: "THUC_DON", idKhung: "admin-tab-mon", idNut: "tab-btn-mon" },
+        { ma: "UU_DAI", idKhung: "admin-tab-uudai", idNut: "tab-btn-uudai" },
+        { ma: "CAI_DAT", idKhung: "admin-tab-caidat", idNut: "tab-btn-caidat" }
+      ];
+      for (var i = 0; i < dsTab.length; i++) {
+        var t = dsTab[i];
+        var khung = document.getElementById(t.idKhung);
+        var nut = document.getElementById(t.idNut);
+        if (t.ma === tenTab) {
+          khung.classList.remove("an-di");
+          nut.classList.add("dang-chon");
+        } else {
+          khung.classList.add("an-di");
+          nut.classList.remove("dang-chon");
+        }
+      }
+    }
+
+    function locDonAdmin(trangThai) {
+      trangThaiDonLocAdmin = trangThai;
+      veTrangQuanLy();
+    }
+
+    function doiTrangThaiDonAdmin(maDon, trangThaiMoi) {
+      kho.capNhatTrangThaiDon(maDon, trangThaiMoi, "", pinPhienHienTai);
+      veTrangQuanLy();
+    }
+
+    function batTatHetHangAdmin(maMon) {
+      kho.batTatHetHang(maMon, pinPhienHienTai);
+      veTrangQuanLy();
+    }
+
+    function xoaMonAdmin(maMon, tenMon) {
+      if (!confirm("Bạn có chắc muốn xóa món \"" + tenMon + "\"?")) return;
+      kho.xoaMon(maMon, pinPhienHienTai);
+      veTrangQuanLy();
+    }
+
+    function xuLyThemMonAdmin() {
+      var kq = kho.themMonMoi({
+        tenMon: document.getElementById("adm-ten-mon").value,
+        moTa: document.getElementById("adm-mota-mon").value,
+        hinhAnh: document.getElementById("adm-anh-mon").value
+      }, pinPhienHienTai);
+      if (!kq.thanhCong) {
+        alert(kq.thongBao);
+        return;
+      }
+      document.getElementById("adm-ten-mon").value = "";
+      document.getElementById("adm-mota-mon").value = "";
+      veTrangQuanLy();
+    }
+
+    function xuLyThemUuDaiAdmin() {
+      var kq = kho.themUuDai({
+        tieuDe: document.getElementById("adm-tieude-uudai").value,
+        nhanUuDai: document.getElementById("adm-nhan-uudai").value,
+        moTa: document.getElementById("adm-mota-uudai").value
+      }, pinPhienHienTai);
+      if (!kq.thanhCong) {
+        alert(kq.thongBao);
+        return;
+      }
+      document.getElementById("adm-tieude-uudai").value = "";
+      document.getElementById("adm-mota-uudai").value = "";
+      veTrangQuanLy();
+    }
+
+    function xoaUuDaiAdmin(maUuDai) {
+      kho.xoaUuDai(maUuDai, pinPhienHienTai);
+      veTrangQuanLy();
+    }
+
+    function luuCaiDatQuanAdmin() {
+      var pinMoi = document.getElementById("cd-ma-pin").value.trim() || pinPhienHienTai;
+      var kq = kho.capNhatThongTinQuan({
+        tenQuan: document.getElementById("cd-ten-quan").value,
+        soNamHoatDong: document.getElementById("cd-so-nam").value,
+        soDienThoai: document.getElementById("cd-sdt").value,
+        soZalo: document.getElementById("cd-zalo").value,
+        gioMoCua: document.getElementById("cd-gio-mo").value,
+        maPinQuanLy: pinMoi,
+        diaChi: document.getElementById("cd-dia-chi").value,
+        linkBanDo: document.getElementById("cd-link-map").value,
+        cauChuyen6Nam: document.getElementById("cd-cau-chuyen").value,
+        firebaseUrl: document.getElementById("cd-firebase-url").value
+      }, pinPhienHienTai);
+
+      if (!kq.thanhCong) {
+        alert(kq.thongBao);
+        return;
+      }
+      pinPhienHienTai = pinMoi;
+      alert("✅ Đã lưu thông tin quán thành công!");
+    }
+
+    function veTrangQuanLy() {
+      var tk = kho.thongKeNhanhQuanLy();
+      document.getElementById("thong-ke-admin").innerHTML =
+        '<div class="o-con-so"><span class="so-lon">' + tk.soDonChoXacNhan + '</span><span class="chu-nho">Đơn chờ giữ bàn</span></div>' +
+        '<div class="o-con-so"><span class="so-lon">' + tk.soDonDaXacNhan + '</span><span class="chu-nho">Bàn đã xác nhận</span></div>' +
+        '<div class="o-con-so"><span class="so-lon">' + tk.soMonDangBan + ' / ' + (tk.soMonDangBan + tk.soMonTamHet) + '</span><span class="chu-nho">Món đang hiển thị</span></div>';
+
+      var dsDon = kho.layDanhSachDonDatBan(trangThaiDonLocAdmin);
+      var htmlDon = "";
+      if (dsDon.length === 0) {
+        htmlDon = '<div class="the-don-admin" style="color:var(--text-muted); text-align:center;">Chưa có đơn đặt bàn nào trong mục này.</div>';
+      } else {
+        for (var i = 0; i < dsDon.length; i++) {
+          var d = dsDon[i];
+          var nhanTT = d.trangThai === "CHO_XAC_NHAN" ? "⏳ Chờ xác nhận" : (d.trangThai === "DA_XAC_NHAN" ? "✅ Đã giữ bàn" : (d.trangThai === "HOAN_TAT" ? "🍻 Đã đón khách" : "✕ Đã hủy"));
+          var chuoiMon = "";
+          if (d.monChonTruoc && d.monChonTruoc.length > 0) {
+            var mangTen = [];
+            for (var k = 0; k < d.monChonTruoc.length; k++) {
+              mangTen.push(d.monChonTruoc[k].tenMon + " (x" + d.monChonTruoc[k].soLuong + ")");
+            }
+            chuoiMon = '<div style="margin-top:6px; color:var(--amber-gold); font-size:0.88rem;">🔥 Mồi dặn trước: ' + mangTen.join(", ") + '</div>';
+          }
+          htmlDon +=
+            '<div class="the-don-admin">' +
+              '<div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">' +
+                '<strong>' + d.maDon + ' • ' + d.tenKhach + ' (<a href="tel:' + d.soDienThoai + '" style="color:var(--amber-gold);">' + d.soDienThoai + '</a>)</strong>' +
+                '<span class="tag-mon-moi">' + nhanTT + '</span>' +
+              '</div>' +
+              '<div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">🕒 Đến lúc: <strong>' + d.gioDen + '</strong> ngày ' + d.ngayDen + ' • 👥 <strong>' + d.soNguoi + ' người</strong></div>' +
+              (d.ghiChu ? '<div style="font-size:0.85rem; color:#fff; margin-top:4px;">💬 Ghi chú: ' + d.ghiChu + '</div>' : '') +
+              chuoiMon +
+              '<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">' +
+                '<button type="button" class="nut-chinh" style="padding:6px 12px; font-size:0.8rem;" onclick="doiTrangThaiDonAdmin(\'' + d.maDon + '\', \'DA_XAC_NHAN\')">✅ Xác Nhận Giữ Bàn</button>' +
+                '<button type="button" class="nut-vien" style="padding:6px 12px; font-size:0.8rem;" onclick="doiTrangThaiDonAdmin(\'' + d.maDon + '\', \'HOAN_TAT\')">🍻 Khách Đã Tới</button>' +
+                '<button type="button" class="nut-vien" style="padding:6px 12px; font-size:0.8rem;" onclick="doiTrangThaiDonAdmin(\'' + d.maDon + '\', \'DA_HUY\')">✕ Hủy Đơn</button>' +
+              '</div>' +
+            '</div>';
+        }
+      }
+      document.getElementById("danh-sach-don-admin").innerHTML = htmlDon;
+
+      var dsMon = kho.layDanhSachMon("TAT_CA", false);
+      var htmlMonAdm = "";
+      for (var m = 0; m < dsMon.length; m++) {
+        var mon = dsMon[m];
+        htmlMonAdm +=
+          '<div class="the-don-admin" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">' +
+            '<div>' +
+              '<strong>' + mon.tenMon + '</strong> ' +
+              (mon.hetHang ? '<span class="tag-het-hang">Đang báo Tạm hết</span>' : '<span style="color:var(--emerald-ok); font-size:0.8rem;">● Đang hiển thị</span>') +
+            '</div>' +
+            '<div style="display:flex; gap:8px; flex-wrap:wrap;">' +
+              '<button type="button" class="nut-vien" onclick="batTatHetHangAdmin(\'' + mon.maMon + '\')">' + (mon.hetHang ? '🟢 Mở Lại' : '🔴 Báo Tạm Hết') + '</button>' +
+              '<button type="button" class="nut-vien" onclick="xoaMonAdmin(\'' + mon.maMon + '\', \'' + mon.tenMon + '\')">🗑️ Xóa</button>' +
+            '</div>' +
+          '</div>';
+      }
+      document.getElementById("danh-sach-mon-admin").innerHTML = htmlMonAdm;
+
+      var dsUD = kho.layDanhSachUuDai(false);
+      var htmlUDAdm = "";
+      for (var u = 0; u < dsUD.length; u++) {
+        htmlUDAdm +=
+          '<div class="the-don-admin" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">' +
+            '<div><strong>[' + dsUD[u].nhanUuDai + '] ' + dsUD[u].tieuDe + '</strong><div style="font-size:0.85rem; color:var(--text-muted);">' + dsUD[u].moTa + '</div></div>' +
+            '<button type="button" class="nut-vien" onclick="xoaUuDaiAdmin(\'' + dsUD[u].maUuDai + '\')">🗑️ Xóa</button>' +
+          '</div>';
+      }
+      document.getElementById("danh-sach-uudai-admin").innerHTML = htmlUDAdm;
+
+      var tt = kho.layThongTinQuan();
+      document.getElementById("cd-ten-quan").value = tt.tenQuan;
+      document.getElementById("cd-so-nam").value = tt.soNamHoatDong;
+      document.getElementById("cd-sdt").value = tt.soDienThoai;
+      document.getElementById("cd-zalo").value = tt.soZalo;
+      document.getElementById("cd-gio-mo").value = tt.gioMoCua;
+      document.getElementById("cd-ma-pin").value = tt.maPinQuanLy;
+      document.getElementById("cd-dia-chi").value = tt.diaChi;
+      document.getElementById("cd-link-map").value = tt.linkBanDo || "";
+      document.getElementById("cd-cau-chuyen").value = tt.cauChuyen6Nam;
+      document.getElementById("cd-firebase-url").value = tt.firebaseUrl || "";
+    }
+  </script>
+</body>
+</html>
